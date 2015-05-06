@@ -228,14 +228,7 @@ module States
 
         initRndLetters()
         {
-            this.allKeys = [Phaser.Keyboard.Q, Phaser.Keyboard.W, Phaser.Keyboard.E, Phaser.Keyboard.R,
-                Phaser.Keyboard.T, Phaser.Keyboard.Z, Phaser.Keyboard.U, Phaser.Keyboard.I,
-                Phaser.Keyboard.O, Phaser.Keyboard.P, Phaser.Keyboard.A, Phaser.Keyboard.S,
-                Phaser.Keyboard.D, Phaser.Keyboard.F, Phaser.Keyboard.G, Phaser.Keyboard.H,
-                Phaser.Keyboard.J, Phaser.Keyboard.K, Phaser.Keyboard.L, Phaser.Keyboard.Y,
-                Phaser.Keyboard.X, Phaser.Keyboard.C, Phaser.Keyboard.V, Phaser.Keyboard.B,
-                Phaser.Keyboard.N, Phaser.Keyboard.M
-            ];
+            this.allKeys = [Phaser.Keyboard.A, Phaser.Keyboard.B, Phaser.Keyboard.C, Phaser.Keyboard.D];
 
         }
 
@@ -627,22 +620,30 @@ module States
         {
             var keyVal;
             var wereKeysAssigned = false;
+
+            //empty currentlySetKeys (necessary for #bugs == #keys) & old bug keys
+            for(var i=0; i<this.bugs.length;i++)
+            {
+                if (this.bugs[i] != null)
+                {
+                    if (this.bugs[i].getCurrentKey() != null) {
+                        var keyCode = this.bugs[i].getCurrentKey().keyCode;
+                        this.game.input.keyboard.removeKey(keyCode);
+                        this.currentlySetKeys[i] = -1;
+                    }
+                }
+            }
+
             for(var i=0; i<this.bugs.length;i++)
             {
 
                 if (this.bugs[i] != null)
                 {
+
+                    // set new
                     keyVal = this.getRandomLetter();
                     while (this.currentlySetKeys.indexOf(keyVal) > -1) keyVal = this.getRandomLetter();
-
                     this.currentlySetKeys[i] = keyVal;
-
-                    // remove old
-                    if (this.bugs[i].getCurrentKey() != null)
-                    {
-                        var keyCode = this.bugs[i].getCurrentKey().keyCode;
-                        this.game.input.keyboard.removeKey(keyCode);
-                    }
 
                     // add
                     var key =  this.game.input.keyboard.addKey(keyVal);
@@ -656,8 +657,6 @@ module States
             }
         }
 
-
-        toInt(value) { return ~~value; }
 
         keyValToString(key: number)
         {

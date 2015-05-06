@@ -46,14 +46,14 @@ module States
 
             this.bg = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, "bg_neu");
 
-            var line1 = "Game Over - The Winner:";
+            var line1 = "Game Over - Gewinner:";
 
             var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,60);
             this.game.add.text(this.game.width/2- 450, 70, line1, style);
 
             if (this.winnerString == "")
             {
-                var line2 = "Nobody!";
+                var line2 = "Niemand!";
                 var style2 = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,80);
                 this.game.add.text(this.game.width/2 - 100, 250, line2, style2);
 
@@ -68,7 +68,7 @@ module States
                 this.winnerBug.animate();
             }
 
-            var line3 = "Time played: "+this.timePlayed;
+            var line3 = "Spielzeit: "+this.timePlayed;
             this.game.add.text(this.game.width/2 - 100, this.game.height * 0.80, line3, style);
         }
 

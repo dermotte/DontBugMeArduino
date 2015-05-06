@@ -13,7 +13,7 @@ class BugsAndFeatures {
 
     preload() {
 
-        var line1 = "Loading...";
+        var line1 = "Laden...";
         var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,60);
         this.game.add.text(this.game.width * 0.40, this.game.height *0.43, line1, style);
 

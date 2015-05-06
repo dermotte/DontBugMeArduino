@@ -29,9 +29,13 @@ module States
                 this.game.add.audio('squeak2', 1, false)
             ];
 
-            var line1 = "Pick at least 2 Bugs!";
+            var umlaut = encodeURIComponent('ä');
+            var line1 = 'Mindestens 2 K'+decodeURIComponent(umlaut)+'fer ausw'+decodeURIComponent(umlaut)+'hlen!';
             var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,60);
-            this.game.add.text(this.game.width * 0.3, 60, line1, style);
+            var text = this.game.add.text(0, 0, line1, style);
+            text.anchor.set(0.5,0.5);
+            text.x = this.game.width/2;
+            text.y = 0 + text.height/2 + 40;
 
             this.START_BUTTON1 = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
             this.START_BUTTON1.onDown.add(MenuState.prototype.buttonPressed, this);
@@ -44,25 +48,35 @@ module States
                 new Sprites.Bug(this.game,0, "BUG0_MOVING", this.game.width*0.2, this.game.height  *0.4),
                 new Sprites.Bug(this.game,1, "BUG1_MOVING", this.game.width*0.35, this.game.height *0.65),
                 new Sprites.Bug(this.game,2, "BUG2_MOVING", this.game.width*0.5, this.game.height *0.4),
-                new Sprites.Bug(this.game,3, "BUG3_MOVING", this.game.width*0.65, this.game.height *0.65),
-                new Sprites.Bug(this.game,4, "BUG4_MOVING", this.game.width*0.8, this.game.height *0.4)
+                new Sprites.Bug(this.game,3, "BUG3_MOVING", this.game.width*0.65, this.game.height *0.65)
             ];
+            // new Sprites.Bug(this.game,4, "BUG4_MOVING", this.game.width*0.8, this.game.height *0.4)
+
+            // arduino keycodes
+            this.bugs[0].setSelectKey(Phaser.Keyboard.A);
+            this.bugs[1].setSelectKey(Phaser.Keyboard.B);
+            this.bugs[2].setSelectKey(Phaser.Keyboard.C);
+            this.bugs[3].setSelectKey(Phaser.Keyboard.D);
 
             // add bug names below bugs
             var style2 = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,40);
-            var name1 = this.bugs[0].getName();
+            var name1 = this.bugs[0].getName()+" (A)";
             this.game.add.text(this.game.width*0.15, this.game.height  *0.50, name1, style2);
-            var name2 = this.bugs[1].getName();
+            var name2 = this.bugs[1].getName()+" (B)";
             this.game.add.text(this.game.width*0.26, this.game.height  *0.75, name2, style2);
-            var name3 = this.bugs[2].getName();
+            var name3 = this.bugs[2].getName()+" (C)";
             this.game.add.text(this.game.width*0.43, this.game.height  *0.50, name3, style2);
-            var name4 = this.bugs[3].getName();
+            var name4 = this.bugs[3].getName()+" (D)";
             this.game.add.text(this.game.width*0.56, this.game.height  *0.75, name4, style2);
-            var name5 = this.bugs[4].getName();
-            this.game.add.text(this.game.width*0.73, this.game.height  *0.50, name5, style2);
+            //var name5 = this.bugs[4].getName();
+            //this.game.add.text(this.game.width*0.73, this.game.height  *0.50, name5, style2);
 
             // chosen bugs
-            this.chosen = [false, false, false, false];
+            this.chosen = Array<boolean>(this.bugs.length);
+            for (var i =0; i<this.chosen.length;i++)
+            {
+                this.chosen[i] = false;
+            }
 
             // add bugs to game
             for (var i = 0; i < this.bugs.length; i++)

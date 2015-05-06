@@ -8,6 +8,8 @@ module Sprites // very important - not even constructor gets called without this
 
         currentKey: Phaser.Key;
 
+        //selectKeyCode: number;
+
         id: number;
         animName: string;
         name: string;
@@ -29,11 +31,19 @@ module Sprites // very important - not even constructor gets called without this
             //this.anchor.set(0.5, 0.5);
             // click functions
             this.selected = false;
-            this.events.onInputDown.add(function () {this.toggleSelected(true)},this);
+            this.events.onInputDown.add(function () {this.toggleSelected()},this);
+
             //this.events.onInputUp.add(function () {this.setClicked(false)},this);
         }
 
-        toggleSelected(val:boolean)
+        setSelectKey(keyCode: number)
+        {
+            // arduino board keys
+            var selectButton = this.game.input.keyboard.addKey(keyCode);
+            selectButton.onDown.add(function() {this.toggleSelected()}, this);
+        }
+
+        toggleSelected()
         {
             this.selected = !this.selected;
         }
