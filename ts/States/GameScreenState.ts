@@ -466,6 +466,7 @@ module States
                     {
                         var keyCode = this.bugs[bugNr].getCurrentKey().keyCode;
                         this.game.input.keyboard.removeKey(keyCode);
+                        this.currentlySetKeys[bugNr] = -1;
                     }
                     if (this.bugsIngame > 2) this.sEnd[0].play();
                     this.bugs[bugNr] = null;
@@ -536,8 +537,6 @@ module States
         handleWin()
         {
             if (this.bugsIngame > 1) return;
-
-            var winnerString: string;
 
             var winnerString: string = "";
             var winnerId:number = -1;
@@ -621,6 +620,8 @@ module States
             var keyVal;
             var wereKeysAssigned = false;
 
+            //var prevAssigned:Array<number> = Array<number>(this.currentlySetKeys.length);
+
             //empty currentlySetKeys (necessary for #bugs == #keys) & old bug keys
             for(var i=0; i<this.bugs.length;i++)
             {
@@ -629,6 +630,7 @@ module States
                     if (this.bugs[i].getCurrentKey() != null) {
                         var keyCode = this.bugs[i].getCurrentKey().keyCode;
                         this.game.input.keyboard.removeKey(keyCode);
+                        //prevAssigned[i] = this.currentlySetKeys[i]; // remember prev key
                         this.currentlySetKeys[i] = -1;
                     }
                 }
@@ -642,7 +644,8 @@ module States
 
                     // set new
                     keyVal = this.getRandomLetter();
-                    while (this.currentlySetKeys.indexOf(keyVal) > -1) keyVal = this.getRandomLetter();
+                    while ((this.currentlySetKeys.indexOf(keyVal) > -1)) keyVal = this.getRandomLetter();
+                    //console.log("Bug "+i+" - current: "+keyVal);
                     this.currentlySetKeys[i] = keyVal;
 
                     // add

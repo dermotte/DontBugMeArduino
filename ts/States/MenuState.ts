@@ -30,7 +30,7 @@ module States
             ];
 
             var umlaut = encodeURIComponent('ä');
-            var line1 = 'Mindestens 2 K'+decodeURIComponent(umlaut)+'fer ausw'+decodeURIComponent(umlaut)+'hlen!';
+            var line1 = 'Mindestens 2 K'+decodeURIComponent(umlaut)+'fer ausw'+decodeURIComponent(umlaut).toString()+'hlen!';
             var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,60);
             var text = this.game.add.text(0, 0, line1, style);
             text.anchor.set(0.5,0.5);
