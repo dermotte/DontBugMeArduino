@@ -1,5 +1,18 @@
 :: creates a distribution folder with all needed files to distribute the game
 @echo off
+:: compile typescript
+tsc --rootDir ts --outDir js ts\app.ts
+tsc --rootDir ts --outDir js ts\GameObjects\Bug.ts
+tsc --rootDir ts --outDir js ts\States\GameOverScreenState.ts
+tsc --rootDir ts --outDir js ts\States\GameScreenState.ts
+tsc --rootDir ts --outDir js ts\States\MenuState.ts
+tsc --rootDir ts --outDir js ts\States\TitleScreenState.ts
+tsc --rootDir ts --outDir js ts\Utils\CountdownTimer.ts
+tsc --rootDir ts --outDir js ts\Utils\GameSettings.ts
+tsc --rootDir ts --outDir js ts\Utils\IntervalTimer.ts
+tsc --rootDir ts --outDir js ts\Utils\RandomIntervalTimer.ts
+tsc --rootDir ts --outDir js ts\Utils\Timer.ts
+tsc --rootDir ts --outDir js ts\Utils\UtilFunctions.ts
 :: clean directory
 echo ################## Cleaning up... #######################
 if exist dist rd /s /q dist 
