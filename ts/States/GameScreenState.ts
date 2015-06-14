@@ -164,7 +164,7 @@ module States
             this.tileSpeed = 1;
 
             // buttonAssignment speed
-            this.rndButtonAssignTimer = new Utils.RandomIntervalTimer(this.game,7,0.5);
+            this.rndButtonAssignTimer = new Utils.RandomIntervalTimer(this.game,7,2);
 
             // button reassign timer
             this.initPhaseButtonReassignTimer = new Utils.IntervalTimer(this.game, 10);

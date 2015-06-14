@@ -29,7 +29,7 @@ module States
                 this.game.add.audio('squeak2', 1, false)
             ];
 
-            var umlaut = encodeURIComponent('ä');
+            var umlaut = encodeURIComponent('Ã¤');
             var line1 = 'Mindestens 2 K'+decodeURIComponent(umlaut)+'fer ausw'+decodeURIComponent(umlaut).toString()+'hlen!';
             var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,60);
             var text = this.game.add.text(0, 0, line1, style);

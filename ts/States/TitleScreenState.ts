@@ -34,7 +34,7 @@ module States
             this.game.add.tween(this.enter).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
             */
 
-            var umlaut = encodeURIComponent('ü');
+            var umlaut = encodeURIComponent('Ã¼');
             var line1 = 'Beliebige Taste dr'+decodeURIComponent(umlaut).toString()+'cken!';
             var style = GameSettings.getTextStyle(GameSettings.TextStyles.STYLE_RED,40);
             this.blinkingText = this.game.add.text(0, 0, line1, style);
